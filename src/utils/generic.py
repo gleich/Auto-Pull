@@ -27,3 +27,13 @@ def check_type(item, expected_type):
     else:
         raise TypeError("{a} isn't a {b}".format(a=object, b=expected_type))
     return item_type
+
+
+def clear_output(lines):
+    """
+    Clear teh output in the output screen
+    :param lines: amount of blank lines printed
+    :return: None
+    """
+    for i in range(lines):
+        print("\n")
