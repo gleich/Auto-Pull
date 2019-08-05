@@ -1,7 +1,9 @@
 import os
 from os import system
-from utils.generic import clear_output
 from time import sleep
+
+from utils.generic import clear_output
+from utils import timer
 
 def list_dot_files():
     """
@@ -44,8 +46,6 @@ def add_command_alias():
             clear_output()
             print("The application can't run without that alias being added to the .bashrc")
             print("This means that the application will stop in 20 seconds")
-            for i in range(20):
-                sleep(1)
-                print(20 - i)
+            timer.countdown(20)
 
 
