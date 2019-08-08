@@ -27,23 +27,27 @@ def add_command_alias():
     Adds alias to .bashrc
     :return: None
     """
-    os.chdir("~")
+    orig_cwd = os.getcwd()
+    print(orig_cwd)
+    for i in range(orig_cwd.count("/") - 2):
+        os.chdir("..")
     dot_files = list_dot_files()
     if ".bashrc" in dot_files:
-        cwd = os.getcwd() + "/.main.py"
-        system('echo "alias pull=""python"{}"'.format(cwd))
-        clear_output()
+        alias = 'alias pull="cd .' + orig_cwd + ' && python main.py -run && cd ~"'
+        print(alias)
+        system('echo "{}" >> .bashrc'.format(alias))
+        clear_output(20)
         print("Added command alias to .bashrc")
     else:
-        clear_output()
+        clear_output(20)
         print("It seems as though there is no .bashrc file located in your root.")
         make_bashrc = input("Should we make a new one in root?\n")
         if "y" in make_bashrc:
             system("touch .bashrc")
-            clear_output()
+            clear_output(20)
             print("Created bashrc")
         else:
-            clear_output()
+            clear_output(20)
             print("The application can't run without that alias being added to the .bashrc")
             print("This means that the application will stop in 20 seconds")
             timer.countdown(20)
